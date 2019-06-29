@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^(?P<service_date>[^/]+)$', views.service_date, name='service_date'),
 ]
