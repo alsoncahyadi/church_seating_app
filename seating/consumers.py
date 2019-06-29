@@ -13,7 +13,7 @@ class SeatConsumer(AsyncConsumer):
             'type': 'websocket.accept'
         })
 
-    async def websocket_receiv(self, event):
+    async def websocket_receive(self, event):
         print('received', event)
     
     async def websocket_disconnect(self, event):
