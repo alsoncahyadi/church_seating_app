@@ -9,6 +9,12 @@ from asgiref.sync import async_to_sync
 # from .models import Thread, ChatMessage
 
 class SeatConsumer(AsyncJsonWebsocketConsumer):
+    END_STATE_MAP = {
+        # beginning state => end state
+        'vacant': 'occupied',
+        'occupied': 'vacant',
+    }
+
     async def connect(self):
         self.service_date = self.scope['url_route']['kwargs']['service_date']
 
@@ -26,14 +32,18 @@ class SeatConsumer(AsyncJsonWebsocketConsumer):
             self.channel_name
         )
 
-    async def receive_json(self, content):
-        print("received json:", content)
+    async def receive_json(self, data):
+        print("received json:", data)
+        blast_data = {
+            'id': data['id'],
+            'state': self.END_STATE_MAP[data['state']],
+        }
 
         await self.channel_layer.group_send(
             self.service_date,
             {
                 'type': 'seat_change_blast',
-                'data': content,
+                'data': blast_data,
             }
         )
 

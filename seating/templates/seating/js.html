@@ -11,8 +11,7 @@ var socket = new ReconnectingWebSocket(endpoint);
 socket.onmessage = function(e) {
   console.log('Received ' + e.data);
   data = JSON.parse(e.data)
-  console.log('Checking ' + data['id']);
-  $('#' + data['id']).attr('checked', '')
+  $('#' + data['id']).attr('state', data['state'])
 }
 
 socket.onopen = function(e) {
@@ -33,7 +32,7 @@ $(document).ready(function(){
     socket.send( JSON.stringify(
       {
         'id': e.target.id,
-        'to': 'checked'
+        'state': $(this).attr('state'),
       }
     ));
   })

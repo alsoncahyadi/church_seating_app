@@ -98,19 +98,19 @@
     position: absolute;
     opacity: 0;
   }
-  .seat input[type=checkbox]:checked + label {
+  .seat input[type=checkbox][state=occupied] + label {
     background: #bada55;
     -webkit-animation-name: rubberBand;
     animation-name: rubberBand;
     animation-duration: 300ms;
     animation-fill-mode: both;
   }
-  .seat input[type=checkbox]:disabled + label {
+  .seat input[type=checkbox][state=disabled] + label {
     background: #F42536;
     text-indent: -9999px;
     overflow: hidden;
   }
-  .seat input[type=checkbox]:disabled + label:after {
+  .seat input[type=checkbox][state=disabled] + label:after {
     content: "X";
     text-indent: 0;
     position: absolute;
@@ -118,7 +118,7 @@
     left: 50%;
     transform: translate(-50%, 0%);
   }
-  .seat input[type=checkbox]:disabled + label:hover {
+  .seat input[type=checkbox][state=disabled] + label:hover {
     box-shadow: none;
     cursor: not-allowed;
   }
