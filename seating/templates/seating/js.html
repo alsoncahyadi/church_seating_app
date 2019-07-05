@@ -1,0 +1,42 @@
+<script>
+
+var serviceDate = {{ service_date_json }};
+var wsStart = 'ws://'
+if (window.location.protocol == 'https:'){
+    wsStart = 'wss://'
+}
+var endpoint = wsStart + window.location.host + '/seating/' + serviceDate;
+var socket = new ReconnectingWebSocket(endpoint);
+
+socket.onmessage = function(e) {
+  console.log('Received ' + e.data);
+  data = JSON.parse(e.data)
+  console.log('Checking ' + data['id']);
+  $('#' + data['id']).attr('checked', '')
+}
+
+socket.onopen = function(e) {
+  console.log('open');
+}
+
+socket.onerror = function(e) {
+  console.log('error');
+}
+
+socket.onclose = function(e) {
+  console.log('close');
+}
+
+$(document).ready(function(){
+  $('.seat input[type="checkbox"]').click(function(e){
+    console.log('Clicked ' + e.target.id);
+    socket.send( JSON.stringify(
+      {
+        'id': e.target.id,
+        'to': 'checked'
+      }
+    ));
+  })
+})
+
+</script>
