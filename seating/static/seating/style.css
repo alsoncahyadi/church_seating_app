@@ -94,6 +94,12 @@
   /* .seat:nth-child(3) {
     margin-right: 14.28571428571429%;
   } */
+  
+  .fa-spinner {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+  }
   .seat input[type=checkbox]{
     position: absolute;
     opacity: 0;
