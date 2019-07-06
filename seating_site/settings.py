@@ -85,10 +85,11 @@ DATABASES = {
     # },
     'default' : {
         'ENGINE' : 'djongo',
-        'NAME' : os.getenv('MONGO_DB_NAME'),
+        'NAME' : os.getenv('MONGO_DB_NAME', 'seating'),
         'USER': os.getenv('MONGO_USER'),
         'PASSWORD': os.getenv('MONGO_PASSWORD'),
-        'HOST': '0.0.0.0',
+        'HOST': os.getenv('MONGO_HOST', '127.0.0.1'),
+        'PORT': int(os.getenv('MONGO_PORT', 27017))
     },
 }
 
@@ -137,7 +138,10 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [(
+                os.getenv('REDIS_HOST', '127.0.0.1'),
+                int(os.getenv('REDIS_PORT', 6379)),
+            )],
         },
     },
 }
