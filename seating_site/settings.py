@@ -76,13 +76,20 @@ WSGI_APPLICATION = 'seating_site.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': '0.0.0.0'
-    }
+    # 'admin': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': os.getenv('DB_NAME'),
+    #     'USER': os.getenv('DB_USER'),
+    #     'PASSWORD': os.getenv('DB_PASSWORD'),
+    #     'HOST': '0.0.0.0'
+    # },
+    'default' : {
+        'ENGINE' : 'djongo',
+        'NAME' : os.getenv('MONGO_DB_NAME'),
+        'USER': os.getenv('MONGO_USER'),
+        'PASSWORD': os.getenv('MONGO_PASSWORD'),
+        'HOST': '0.0.0.0',
+    },
 }
 
 
