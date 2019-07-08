@@ -17,8 +17,8 @@ class SeatConsumer(AsyncJsonWebsocketConsumer):
     }
 
     @database_sync_to_async
-    def get_service(self):
-        return Service.get_or_new_now()
+    def get_service(self, date):
+        return Service.get_or_new(date)
     
     @database_sync_to_async
     def set_seat_state(self, seat_id, state):
@@ -26,8 +26,11 @@ class SeatConsumer(AsyncJsonWebsocketConsumer):
         self.service.save()
 
     async def connect(self):
-        self.service_date = self.scope['url_route']['kwargs']['service_date']
-        self.service = await self.get_service()
+        self.service_date = self.scope['url_route']['kwargs'].get(
+            'service_date',
+            datetime.now().strftime("%Y-%m-%d") # default
+        )
+        self.service = await self.get_service(datetime.strptime(self.service_date, Service.DATE_FORMAT))
 
         await self.channel_layer.group_add(
             self.service_date,

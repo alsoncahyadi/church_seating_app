@@ -35,6 +35,7 @@ class Seats(models.Model):
         abstract = True
 
 class Service(models.Model):
+    DATE_FORMAT = '%Y-%m-%d'
     service_date = models.DateField(max_length=255, db_index=True)
     seats = models.EmbeddedModelField(model_container=Seats, default=Seats())
 

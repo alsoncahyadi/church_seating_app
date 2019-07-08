@@ -11,6 +11,7 @@ application = ProtocolTypeRouter({
         AuthMiddlewareStack(
             URLRouter(
                 [
+                    url(r'^seating/$', SeatConsumer),
                     url(r'^seating/(?P<service_date>[^/]+)$', SeatConsumer),
                 ]
             )
