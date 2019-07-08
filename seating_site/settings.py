@@ -90,7 +90,7 @@ DATABASES = {
         'USER': os.getenv('MONGO_USER'),
         'PASSWORD': os.getenv('MONGO_PASSWORD'),
         'HOST': os.getenv('MONGO_HOST', '127.0.0.1'),
-        'PORT': int(os.getenv('MONGO_PORT', 27017))
+        # 'PORT': int(os.getenv('MONGO_PORT', 27017))
     },
 }
 
