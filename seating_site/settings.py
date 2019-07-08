@@ -91,6 +91,8 @@ DATABASES = {
         'PASSWORD': os.getenv('MONGO_PASSWORD'),
         'HOST': os.getenv('MONGO_HOST', '127.0.0.1'),
         'PORT': int(os.getenv('MONGO_PORT', 27017)),
+        'AUTH_SOURCE': os.getenv('MONGO_DB_NAME', 'seating'),
+        'AUTH_MECHANISM': 'SCRAM-SHA-1',
     },
 }
 
