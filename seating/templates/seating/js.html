@@ -6,7 +6,11 @@ if (window.location.protocol == 'https:'){
     wsStart = 'wss://'
 }
 var endpoint = wsStart + window.location.host + '/seating/' + serviceDate;
-var socket = new ReconnectingWebSocket(endpoint);
+var socket = new ReconnectingWebSocket(endpoint, null, {
+  timeoutInterval: 5400,
+  reconnectInterval: 3000,
+  debug: true
+});
 
 socket.onmessage = function(e) {
   console.log('Received ' + e.data);

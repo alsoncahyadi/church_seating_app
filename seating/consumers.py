@@ -19,7 +19,7 @@ class SeatConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def get_service(self, date):
         return Service.get_or_new(date)
-    
+
     @database_sync_to_async
     def set_seat_state(self, seat_id, state):
         self.service.seats.set_state(seat_id, state)
